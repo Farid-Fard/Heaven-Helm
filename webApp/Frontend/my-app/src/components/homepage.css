@@ -1,0 +1,70 @@
+
+.home-page {
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: #007bff;
+    padding: 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.auth-buttons button {
+    padding: 10px 20px;
+    background-color: #fff;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.auth-buttons button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.background-photo {
+    height: 300px;
+    /* background-image: url('/H&H-Background.png');  */
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 20px;
+}
+
+.content {
+    text-align: center;
+    padding: 20px;
+}
+
+.category-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.category-buttons button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.category-buttons button:hover {
+    background-color: #0056b3;
+}

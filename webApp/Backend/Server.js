@@ -10,12 +10,11 @@ const port = 4000;
 app.use(express.json());
 app.use(cors());
 
-// Task routes
-app.use("/item", require("./routes/item"));
+// Item routes 
+app.use("/items", require("./routes/item"));
 
-
-//user routes
-app.use("/user", require("./routes/user.js"));
+// User routes
+app.use("/user", require("./routes/user"));
 
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
