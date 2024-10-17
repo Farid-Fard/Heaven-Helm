@@ -22,7 +22,7 @@ const register = async (req, res) => {
         let hashPassword = await bcrypt.hash(password, 10);
         let newUser = await User.create({ username, email, password: hashPassword });
 
-        // Exclude password from the returned user object
+      
         let userResponse = {
             _id: newUser._id,
             username: newUser.username,

@@ -1,49 +1,59 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; 
+import { useNavigate } from 'react-router-dom'; 
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState(''); 
+  const [password, setPassword] = useState(''); 
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
-  const validateCredentials = (email, password) => {
-    const registeredEmail = localStorage.getItem('registeredEmail');
-    const registeredPassword = localStorage.getItem('registeredPassword');
-    return email === registeredEmail && password === registeredPassword;
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    setIsSubmitting(true); 
 
-    if (validateCredentials(email, password)) {
-      setLoginSuccess(true);
-      setErrorMessage('');
-    } else {
+    try {
+    
+      const response = await axios.post('http://localhost:4000/user/login', {
+        email, 
+        password, 
+      });
+
+      if (response.status === 200) {
+        setLoginSuccess(true);
+        setErrorMessage('');
+        
+        localStorage.setItem('token', response.data.token);
+      } else {
+        setLoginSuccess(false);
+        setErrorMessage('Invalid email or password. Please try again.');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
       setLoginSuccess(false);
-      setErrorMessage('Invalid email or password. Please try again.');
-    }
-
-    setIsSubmitting(false);
+      setErrorMessage('Login failed. Please try again.');
+    } finally {
+      setIsSubmitting(false); 
   };
-
+  }
+  
   useEffect(() => {
+   
     if (loginSuccess) {
       const timer = setTimeout(() => {
         navigate("/user-account");
       }, 500);
 
-      return () => clearTimeout(timer);
+      return () => clearTimeout(timer); 
     }
   }, [loginSuccess, navigate]);
 
   return (
     <div className="login-container">
       <div className="background-photo">
-        {/* <img src={`${process.env.PUBLIC_URL}/H&H-Background.png`} alt="Background" /> */}
+        {/* Background image */}
       </div>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
@@ -53,7 +63,7 @@ const Login = () => {
             type="email"
             id="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)} 
             required
           />
         </div>
@@ -63,7 +73,7 @@ const Login = () => {
             type="password"
             id="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)} e
             required
           />
         </div>

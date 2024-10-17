@@ -24,7 +24,7 @@ const itemSchema = new mongoose.Schema(
       }
     },
     build: { type: Number },
-    photo: { type: String },
+    photo: { type: Buffer},
     category: { 
       type: String, 
       enum: ['Motorcycles', 'Gears', 'Spare Parts'], 
